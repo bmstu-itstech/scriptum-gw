@@ -16,20 +16,18 @@ jobs:
       - name: Deploy
         uses: appleboy/ssh-action@v1.0.3
         env:
-          EXTERNAL_GRPC_PORT: ${{ vars.EXTERNAL_GRPC_PORT }}
-          PGSSLROOTCERT: ${{ vars.PGSSLROOTCERT }}
-          SC_POSTGRES_URI: ${{ secrets.SC_POSTGRES_URI }}
+          SC_SERVER_JWT_SECRET: ${{ secret.SC_SERVER_JWT_SECRET }}
+          SC_SERVER_ADDR: ${{ vars.SC_SERVER_ADDR }}
         with:
           host: ${{ vars.SSH_HOST }}
           port: ${{ vars.SSH_PORT }}
           username: ${{ vars.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script_stop: true
-          envs: EXTERNAL_GRPC_PORT, PGSSLROOTCERT, SC_POSTGRES_URI
+          envs: SC_SERVER_JWT_SECRET, SC_SERVER_ADDR
           script: |
             cd ${{ vars.PROJECT_DIR }}
             git stash
             git checkout main
             git pull origin main
-            docker compose -f docker-compose.ci.yaml run --rm migrate
-            docker compose -f docker-compose.ci.yaml up --build -d grpc
+            docker compose up --build -d
