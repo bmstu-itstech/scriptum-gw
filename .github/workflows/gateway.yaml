@@ -16,7 +16,7 @@ jobs:
       - name: Deploy
         uses: appleboy/ssh-action@v1.0.3
         env:
-          SC_SERVER_JWT_SECRET: ${{ secret.SC_SERVER_JWT_SECRET }}
+          SC_SERVER_JWT_SECRET: ${{ secrets.SC_SERVER_JWT_SECRET }}
           SC_SERVER_ADDR: ${{ vars.SC_SERVER_ADDR }}
         with:
           host: ${{ vars.SSH_HOST }}
