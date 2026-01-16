@@ -1,0 +1,12 @@
+services:
+  gateway:
+    build: .
+    command: [
+      "-config", "/etc/app/prod.yaml"
+    ]
+    environment:
+      SC_SERVER_JWT_SECRET: $SC_SERVER_JWT_SECRET
+      SC_SERVER_ADDR: $SC_SERVER_ADDR
+    volumes:
+      - ./config:/etc/app:ro
+    network_mode: host

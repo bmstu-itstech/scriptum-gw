@@ -1,0 +1,8 @@
+boxes_service:
+  addr: "localhost:8070"
+
+jobs_service:
+  addr: "localhost:8070"
+
+file_service:
+  addr: "localhost:8070"
