@@ -76,7 +76,7 @@ func main() {
 			return nil
 		}),
 		runtime.WithMiddlewares(
-			auth.NewMiddleware(cfg.Server.JwtSecret).Handler,
+			auth.MustNewMiddleware(cfg.Server.JwtSecret).Handler,
 			logs.NewMiddleware(l).Handler,
 		),
 	)

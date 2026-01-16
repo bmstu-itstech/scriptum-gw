@@ -14,10 +14,21 @@ type Middleware struct {
 	secret []byte
 }
 
-func NewMiddleware(secret string) *Middleware {
+func NewMiddleware(secret string) (*Middleware, error) {
+	if secret == "" {
+		return nil, errors.New("secret key is required")
+	}
 	return &Middleware{
 		secret: []byte(secret),
+	}, nil
+}
+
+func MustNewMiddleware(secret string) *Middleware {
+	m, err := NewMiddleware(secret)
+	if err != nil {
+		panic(err)
 	}
+	return m
 }
 
 func (m *Middleware) Handler(next runtime.HandlerFunc) runtime.HandlerFunc {
