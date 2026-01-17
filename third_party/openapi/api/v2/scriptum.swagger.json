@@ -263,7 +263,7 @@
     "/v2/files": {
       "post": {
         "summary": "Upload a file",
-        "description": "На самом деле здесь multipart-data с 'attachment' файлом.",
+        "description": "На самом деле здесь multipart-data с 'attachment' файлом",
         "operationId": "upload",
         "responses": {
           "200": {
